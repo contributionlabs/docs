@@ -20,10 +20,28 @@
             ]
           },
           {
-            "group": "Token Distributions",
+            "group": "Airdrop Claim Pages",
             "pages": [
-              "token-distributions/quickstart"
-            ]
+              "airdrop-claims/overview",
+              "airdrop-claims/design",
+              "airdrop-claims/snapshot"
+            ],
+            "icon": "megaphone"
+          },
+          {
+            "group": "Campaigns",
+            "pages": [
+              "campaigns/overview",
+              "campaigns/api-activity"
+            ],
+            "icon": "party-horn"
+          },
+          {
+            "group": "Token Sales",
+            "pages": [
+              "token-sales/coming-soon"
+            ],
+            "icon": "coins"
           }
         ]
       }
@@ -33,17 +51,7 @@
         {
           "anchor": "Home",
           "href": "https://megaphone.xyz",
-          "icon": "megaphone"
-        },
-        {
-          "anchor": "Twitter",
-          "href": "https://x.com/megaphone_hq",
-          "icon": "twitter"
-        },
-        {
-          "anchor": "DM us on Telegram",
-          "href": "https://t.me/thatguyintech",
-          "icon": "hand"
+          "icon": "up-right-from-square"
         }
       ]
     }

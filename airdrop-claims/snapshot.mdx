@@ -1,0 +1,18 @@
+---
+title: "Snapshot and allowlist configurations"
+description: "How to set up your snapshot and allowlist configurations for your airdrop claim."
+---
+
+Download the [example-snapshot.csv file here](https://megaphone.b-cdn.net/docs/example-snapshot.csv).
+
+![Example snapshot](https://megaphone.b-cdn.net/docs/example-snapshot-img.png)
+
+1. Chain and token address
+2. Snapshot of token holders (See the example csv file above)
+    - `address`: wallet addresses of the allowlisted addresses
+    - `allocation`: the total allocation for each address, denominated in the token's decimals (i.e. 6 decimals for USDC, 18 decimals for ETH)
+    - `eligibilityCriteria1`, `eligibilityCriteria2`, etc.: breakdown of reasons for the allocation (i.e. "Pudgy Penguin NFT Holder", "Bought boba with crypto")
+3. Admin wallet address: this is the wallet address that will be allowed to withdraw any unclaimed tokens after the airdrop is over.
+
+Once we have deployed your distribution contract, we will coordinate with you to
+deposit funds into the contract to finalize your claim setup.

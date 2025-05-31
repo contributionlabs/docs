@@ -1,0 +1,77 @@
+---
+title: 'Custom API Activity'
+description: 'How to integrate custom API activity into your campaign.'
+---
+
+# 🤝 Third-party activity integration
+<Tip>DeForm has a list of first-party activities that can be done in the DeForm
+Campaigns platform. However in order to support any kind of activities, we offer
+the ability to create an activity with any custom API.</Tip>
+
+### 🔑 Auth
+
+Your API should not require any auth and should be an open API endpoint. In the future, we plan to allow custom headers required for the API (ex: API keys).
+
+### 🎟️ Input / Request
+
+<Tip>⚙️ Whenever a DeForm Campaigns user verifies doing an activity on the platform, our backend will make a request to your open API endpoint with the below data.</Tip>
+
+**URL**: `https://<domain>/<path>?<static query params>`
+
+**Query params**
+
+- your own custom static query params (ex: `requiredPts=50`)
+- identity query params (depending on which identities you pick to identify a unique user, we will call the API with one or more of these query params)
+    - `evmAddress` (ex: `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`)
+    - `farcasterFid` (unique Farcaster FID - ex: `12345`)
+
+**Example request (unique identity = `evmAddress`)**
+
+```
+https://game.deform.cc/points?requiredPts=50&evmAddress=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+```
+
+### 🚪 Output / Response
+
+<Warning>We expect a particular response format from your open API endpoint. We will throw a 500 error if we detect any response that doesn’t conform to the below format.</Warning>
+
+**Response Schema**
+
+```json
+type ActivityCheckResponse = {
+    // optional error object to provide more context
+    error?: {
+        // any error code that you define
+        code: string | number;
+        // user-facing error message that we will show the user for more context
+        message: string;
+    };
+    data: {
+        // whether the user has successfully completed the activity
+        result: boolean;
+    };
+};
+```
+
+**Example (Success)**
+
+```json
+{
+     "data": {
+         "result”: true
+     }
+}
+```
+
+**Example (Failure)**
+```json
+{
+    "error": {
+        "code": "ACTIVITY_INCOMPLETE",
+        "message": "You only have 49 points."
+     },
+     "data": {
+         "result”: false
+     }
+}
+```
