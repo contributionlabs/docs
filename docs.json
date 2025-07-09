@@ -20,28 +20,20 @@
             ]
           },
           {
-            "group": "Airdrop Claim Pages",
+            "group": "Megaphone Pages",
             "pages": [
-              "airdrop-claims/overview",
-              "airdrop-claims/design",
-              "airdrop-claims/snapshot"
+              "megaphone/overview",
+              "megaphone/api-activity",
+              "megaphone/forms"
             ],
             "icon": "megaphone"
           },
           {
-            "group": "Campaigns",
+            "group": "Airdrop Claims",
             "pages": [
-              "campaigns/overview",
-              "campaigns/api-activity"
+              "airdrop-claims/overview"
             ],
-            "icon": "party-horn"
-          },
-          {
-            "group": "Token Sales",
-            "pages": [
-              "token-sales/coming-soon"
-            ],
-            "icon": "coins"
+            "icon": "gem"
           }
         ]
       }
