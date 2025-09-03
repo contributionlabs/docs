@@ -11,7 +11,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "groups": [
           {
             "group": "Get Started",
@@ -20,7 +20,7 @@
             ]
           },
           {
-            "group": "Megaphone Pages",
+            "group": "Megaphone",
             "pages": [
               "megaphone/overview",
               "megaphone/api-activity",
@@ -31,7 +31,8 @@
           {
             "group": "Airdrop Claims",
             "pages": [
-              "airdrop-claims/overview"
+              "airdrop-claims/overview",
+              "airdrop-claims/snapshot"
             ],
             "icon": "gem"
           }
@@ -41,9 +42,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Home",
-          "href": "https://megaphone.xyz",
-          "icon": "up-right-from-square"
+          "anchor": "Roadmap",
+          "href": "https://megaphone.canny.io",
+          "icon": "rocket"
         }
       ]
     }
@@ -55,8 +56,12 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "https://t.me/thatguyintech"
+        "label": "Roadmap",
+        "href": "https://megaphone.canny.io"
+      },
+      {
+        "label": "DeForm",
+        "href": "https://app.deform.cc"
       }
     ],
     "primary": {

@@ -1,77 +1,114 @@
 ---
-title: 'Custom API Activity'
-description: 'How to integrate custom API activity into your campaign.'
+title: "API Activity"
+description: "How to integrate custom API activity into your campaign."
 ---
 
 # 🤝 Third-party activity integration
-<Tip>DeForm has a list of first-party activities that can be done in the DeForm
-Campaigns platform. However in order to support any kind of activities, we offer
-the ability to create an activity with any custom API.</Tip>
+
+<Note>
+  Although Megaphone supports many first-party quests, there are non-standard
+  quests and verifications that require a custom third-party API integration.
+  This is the guide for integrating a custom third-party API.
+</Note>
 
 ### 🔑 Auth
 
-Your API should not require any auth and should be an open API endpoint. In the future, we plan to allow custom headers required for the API (ex: API keys).
+Your API endpoint should not require any auth and should be an open API endpoint. In the future, we plan to allow custom headers required for the API (ex: API keys).
 
-### 🎟️ Input / Request
+### 🎟️ Input/request from Megaphone to your API
 
-<Tip>⚙️ Whenever a DeForm Campaigns user verifies doing an activity on the platform, our backend will make a request to your open API endpoint with the below data.</Tip>
+<Tip>
+  Whenever a Megaphone campaign user verifies doing an activity on your
+  Megaphone page, our backend will make a request to your open API endpoint with
+  the below data.
+</Tip>
 
-**URL**: `https://<domain>/<path>?<static query params>`
+**URL**: `https://<endpoint>/<path>?<queryParamKey?=<queryParamValue>>`
 
-**Query params**
+- `<endpoint>/<path>`: your base API endpoint
+- `<queryParamKey?><queryParamValue>`: your own custom static query params (ex: `evmAddress=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`)
 
-- your own custom static query params (ex: `requiredPts=50`)
-- identity query params (depending on which identities you pick to identify a unique user, we will call the API with one or more of these query params)
-    - `evmAddress` (ex: `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`)
-    - `farcasterFid` (unique Farcaster FID - ex: `12345`)
-
-**Example request (unique identity = `evmAddress`)**
+**Example request**
 
 ```
-https://game.deform.cc/points?requiredPts=50&evmAddress=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+https://api.example.com/points?&evmAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045
 ```
 
-### 🚪 Output / Response
+### 🚪 Expected Output / Response from your API
 
-<Warning>We expect a particular response format from your open API endpoint. We will throw a 500 error if we detect any response that doesn’t conform to the below format.</Warning>
+<Warning>
+  We expect a particular response format from your open API endpoint. We will
+  throw a 500 error if we detect any response that doesn’t conform to the below
+  format.
+</Warning>
 
 **Response Schema**
 
 ```json
-type ActivityCheckResponse = {
-    // optional error object to provide more context
-    error?: {
-        // any error code that you define
-        code: string | number;
-        // user-facing error message that we will show the user for more context
-        message: string;
-    };
-    data: {
-        // whether the user has successfully completed the activity
-        result: boolean;
-    };
-};
-```
-
-**Example (Success)**
-
-```json
+type ThirdPartyApiResonse = {
+  status: "eligible";
+  points: number;
+} | {
+  status: "ineligible";
+} |
 {
-     "data": {
-         "result”: true
-     }
+  status: "error";
+  message: string;
 }
 ```
 
-**Example (Failure)**
+Megaphone expects these status codes to be returned from your api endpoint for different response types:
+
+- status: `eligible` — `200`
+- status: `ineligible` — `200`
+- status `error`
+  - `4xx` if Megaphone made a bad request
+  - `5xx` if your API service is unavailable
+
+**Example (Eligible)**
+
+HTTP Status: `200`
+
 ```json
 {
-    "error": {
-        "code": "ACTIVITY_INCOMPLETE",
-        "message": "You only have 49 points."
-     },
-     "data": {
-         "result”: false
-     }
+  "status": "eligible",
+  "points": 100
 }
 ```
+
+**Example (Ineligible)**
+
+HTTP Status: `200`
+
+```json
+{
+  "status": "ineligible"
+}
+```
+
+**Example (Error)**
+
+HTTP Status: `4xx`
+
+```json
+{
+  "status": "error",
+  "message": "Wallet address not found."
+}
+```
+
+# ❓ FAQ
+
+<Accordion title="What happens when a user is marked ineligible?">
+
+You can let us know if you want:
+
+`(A) users who are ineligible to be handled as receiving “0” points and completing the activity`
+
+OR
+
+`(B) users who are ineligible will temporarily fail the activity and then will be allowed to retry the activity after a cooldown period`
+
+We will configure the appropriate behavior on the Megaphone platform side.
+
+</Accordion>
