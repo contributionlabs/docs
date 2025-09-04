@@ -37,6 +37,15 @@
             "icon": "gem"
           }
         ]
+      },
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "OneFootball Club",
+            "pages": []
+          }
+        ]
       }
     ],
     "global": {
