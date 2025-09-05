@@ -49,13 +49,7 @@
       }
     ],
     "global": {
-      "anchors": [
-        {
-          "anchor": "Roadmap",
-          "href": "https://megaphone.canny.io",
-          "icon": "rocket"
-        }
-      ]
+      "anchors": []
     }
   },
   "logo": {
@@ -65,12 +59,8 @@
   "navbar": {
     "links": [
       {
-        "label": "Roadmap",
+        "label": "Features",
         "href": "https://megaphone.canny.io"
-      },
-      {
-        "label": "DeForm",
-        "href": "https://app.deform.cc"
       }
     ],
     "primary": {
