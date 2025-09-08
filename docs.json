@@ -43,7 +43,9 @@
         "groups": [
           {
             "group": "OneFootball Club",
-            "pages": []
+            "pages": [
+              "ofc/migration"
+            ]
           }
         ]
       }
