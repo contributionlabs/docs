@@ -25,7 +25,10 @@ Your API endpoint should not require any auth and should be an open API endpoint
 - `<queryParamKey?><queryParamValue>`: identity-specific static query params. Supported queryParams are `evmAddress` and `emailAddress`. If you would like other identity options, please request them on our [public Megaphone roadmap](https://megaphone.canny.io/).
 
   <Danger>
-    For evm address, we normalize the string to lowercase. Make sure that your endpoint supports lookup by lowercase address to prevent issues!
+    For `evmAddress`, we normalize the string to lowercase. Make sure that your endpoint supports lookup by lowercase address to prevent issues!
+
+    \
+    For `emailAddress`, note that Megaphone automatically blocks signups from [temporary/disposable email services](https://raw.githubusercontent.com/disposable/disposable-email-domains/master/domains.txt) as part of our anti-sybil protections.
   </Danger>
   - `evmAddress`:  `evmAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045`
   - `emailAddress`: `emailAddress=vitalik@buterin.com`
